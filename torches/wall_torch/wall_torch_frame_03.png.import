@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csdhlq1tsbla4"
-path="res://.godot/imported/torch_asset_04.png-c5bbbe115ced2a7434e22d72514a76f6.ctex"
+uid="uid://bktorchf0003"
+path="res://.godot/imported/wall_torch_frame_03.png-0b5e8daf398d9734b065c6a2fc5b1735.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://torches/torch_asset_04.png"
-dest_files=["res://.godot/imported/torch_asset_04.png-c5bbbe115ced2a7434e22d72514a76f6.ctex"]
+source_file="res://torches/wall_torch/wall_torch_frame_03.png"
+dest_files=["res://.godot/imported/wall_torch_frame_03.png-0b5e8daf398d9734b065c6a2fc5b1735.ctex"]
 
 [params]
 

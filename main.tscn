@@ -2,9 +2,14 @@
 
 [ext_resource type="Script" uid="uid://c81jgwf8i0kyo" path="res://player.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://dk20mppuq8xea" path="res://floor-assets/castle_cellar_floor_tile_01.png" id="2"]
-[ext_resource type="Texture2D" path="res://walls/stone/02_wall_back_north.png" id="3"]
-[ext_resource type="Texture2D" path="res://torches/torch_asset_02.png" id="4"]
-[ext_resource type="Script" path="res://torch_light.gd" id="5"]
+[ext_resource type="Texture2D" uid="uid://bk1inbn23cfdi" path="res://walls/stone/02_wall_back_north.png" id="3"]
+[ext_resource type="SpriteFrames" uid="uid://bktorchsf0001" path="res://torches/wall_torch/wall_torch_sprite_frames.tres" id="4"]
+[ext_resource type="Script" uid="uid://7s4uov6kahnf" path="res://torch_light.gd" id="5"]
+[ext_resource type="Texture2D" uid="uid://c21m42h04eaas" path="res://walls/stone/wall-bottom.png" id="5_7mycd"]
+[ext_resource type="Texture2D" uid="uid://k62nb3o8kgv0" path="res://walls/stone/wall-east-west.png" id="6_272bh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2"]
+size = Vector2(640, 32)
 
 [sub_resource type="Gradient" id="Gradient_torch"]
 offsets = PackedFloat32Array(0, 0.18, 0.42, 1)
@@ -17,9 +22,6 @@ height = 256
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(1, 0.5)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2"]
-size = Vector2(640, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4"]
 size = Vector2(640, 24)
@@ -36,7 +38,6 @@ size = Vector2(36, 36)
 color = Color(0.11, 0.11, 0.14, 1)
 
 [node name="Floor" type="TextureRect" parent="World" unique_id=2033970280]
-texture_filter = 0
 offset_left = -320.0
 offset_top = -180.0
 offset_right = 320.0
@@ -54,7 +55,6 @@ position = Vector2(0, -196)
 shape = SubResource("RectangleShape2D_2")
 
 [node name="Visual" type="TextureRect" parent="World/Walls/WallTop" unique_id=1866677558]
-texture_filter = 0
 offset_left = -320.0
 offset_top = -16.0
 offset_right = 320.0
@@ -63,51 +63,123 @@ mouse_filter = 2
 texture = ExtResource("3")
 stretch_mode = 1
 
-[node name="TorchNorthLeft" type="Sprite2D" parent="World/Walls/WallTop" unique_id=877100001]
-texture_filter = 0
+[node name="TorchNorthLeft" type="AnimatedSprite2D" parent="World/Walls/WallTop" unique_id=877100001]
 position = Vector2(-144, 0)
 scale = Vector2(0.118, 0.118)
-texture = ExtResource("4")
+sprite_frames = ExtResource("4")
+animation = &"default"
+autoplay = "default"
 
-[node name="TorchNorthRight" type="Sprite2D" parent="World/Walls/WallTop" unique_id=877100002]
-texture_filter = 0
+[node name="TorchNorthRight" type="AnimatedSprite2D" parent="World/Walls/WallTop" unique_id=877100002]
 position = Vector2(144, 0)
 scale = Vector2(0.118, 0.118)
-texture = ExtResource("4")
+sprite_frames = ExtResource("4")
+animation = &"default"
+autoplay = "default"
 flip_h = true
 
 [node name="TorchLightLeft" type="PointLight2D" parent="World/Walls/WallTop" unique_id=877100010]
-position = Vector2(-144, 8)
-enabled = true
+position = Vector2(-143.20001, 8)
 color = Color(1, 0.82, 0.58, 1)
 energy = 0.72
-blend_mode = 0
 texture = SubResource("GradientTexture2D_torch")
 texture_scale = 2.35
 script = ExtResource("5")
 
 [node name="TorchLightRight" type="PointLight2D" parent="World/Walls/WallTop" unique_id=877100011]
 position = Vector2(144, 8)
-enabled = true
 color = Color(1, 0.82, 0.58, 1)
 energy = 0.72
-blend_mode = 0
 texture = SubResource("GradientTexture2D_torch")
 texture_scale = 2.35
 script = ExtResource("5")
 
 [node name="WallBottom" type="StaticBody2D" parent="World/Walls" unique_id=1293791465]
+z_index = 1
 position = Vector2(0, 192)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Walls/WallBottom" unique_id=2102984354]
 shape = SubResource("RectangleShape2D_4")
 
-[node name="Visual" type="ColorRect" parent="World/Walls/WallBottom" unique_id=1248797143]
-offset_left = -320.0
-offset_top = -12.0
-offset_right = 320.0
-offset_bottom = 12.0
-color = Color(0.5, 0.5, 0.55, 1)
+[node name="Sprite2D" type="Sprite2D" parent="World/Walls/WallBottom" unique_id=1333359336]
+position = Vector2(-304, -15)
+texture = ExtResource("5_7mycd")
+
+[node name="Sprite2D2" type="Sprite2D" parent="World/Walls/WallBottom" unique_id=1329468490]
+position = Vector2(-272, -15)
+texture = ExtResource("5_7mycd")
+
+[node name="Sprite2D3" type="Sprite2D" parent="World/Walls/WallBottom" unique_id=14869894]
+position = Vector2(-240, -15)
+texture = ExtResource("5_7mycd")
+
+[node name="Sprite2D4" type="Sprite2D" parent="World/Walls/WallBottom" unique_id=272283452]
+position = Vector2(-208, -15)
+texture = ExtResource("5_7mycd")
+
+[node name="Sprite2D5" type="Sprite2D" parent="World/Walls/WallBottom" unique_id=1392642323]
+position = Vector2(-176, -15)
+texture = ExtResource("5_7mycd")
+
+[node name="Sprite2D6" type="Sprite2D" parent="World/Walls/WallBottom" unique_id=2118139153]
+position = Vector2(-144, -15)
+texture = ExtResource("5_7mycd")
+
+[node name="Sprite2D7" type="Sprite2D" parent="World/Walls/WallBottom" unique_id=790793503]
+position = Vector2(-112, -15)
+texture = ExtResource("5_7mycd")
+
+[node name="Sprite2D8" type="Sprite2D" parent="World/Walls/WallBottom" unique_id=470406447]
+position = Vector2(-80, -15)
+texture = ExtResource("5_7mycd")
+
+[node name="Sprite2D9" type="Sprite2D" parent="World/Walls/WallBottom" unique_id=629115435]
+position = Vector2(-48, -15)
+texture = ExtResource("5_7mycd")
+
+[node name="Sprite2D10" type="Sprite2D" parent="World/Walls/WallBottom" unique_id=1947426760]
+position = Vector2(-16, -15)
+texture = ExtResource("5_7mycd")
+
+[node name="Sprite2D11" type="Sprite2D" parent="World/Walls/WallBottom" unique_id=1319807540]
+position = Vector2(16, -15)
+texture = ExtResource("5_7mycd")
+
+[node name="Sprite2D12" type="Sprite2D" parent="World/Walls/WallBottom" unique_id=1950757711]
+position = Vector2(48, -15)
+texture = ExtResource("5_7mycd")
+
+[node name="Sprite2D13" type="Sprite2D" parent="World/Walls/WallBottom" unique_id=28300489]
+position = Vector2(80, -15)
+texture = ExtResource("5_7mycd")
+
+[node name="Sprite2D14" type="Sprite2D" parent="World/Walls/WallBottom" unique_id=518936157]
+position = Vector2(112, -15)
+texture = ExtResource("5_7mycd")
+
+[node name="Sprite2D15" type="Sprite2D" parent="World/Walls/WallBottom" unique_id=87216574]
+position = Vector2(144, -15)
+texture = ExtResource("5_7mycd")
+
+[node name="Sprite2D16" type="Sprite2D" parent="World/Walls/WallBottom" unique_id=1957650078]
+position = Vector2(176, -15)
+texture = ExtResource("5_7mycd")
+
+[node name="Sprite2D17" type="Sprite2D" parent="World/Walls/WallBottom" unique_id=1853457367]
+position = Vector2(208, -15)
+texture = ExtResource("5_7mycd")
+
+[node name="Sprite2D18" type="Sprite2D" parent="World/Walls/WallBottom" unique_id=2029625681]
+position = Vector2(240, -15)
+texture = ExtResource("5_7mycd")
+
+[node name="Sprite2D19" type="Sprite2D" parent="World/Walls/WallBottom" unique_id=66847329]
+position = Vector2(272, -15)
+texture = ExtResource("5_7mycd")
+
+[node name="Sprite2D20" type="Sprite2D" parent="World/Walls/WallBottom" unique_id=1895628454]
+position = Vector2(304, -15)
+texture = ExtResource("5_7mycd")
 
 [node name="WallLeft" type="StaticBody2D" parent="World/Walls" unique_id=1769334699]
 position = Vector2(-332, 0)
@@ -115,12 +187,70 @@ position = Vector2(-332, 0)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Walls/WallLeft" unique_id=829502073]
 shape = SubResource("RectangleShape2D_3")
 
-[node name="Visual" type="ColorRect" parent="World/Walls/WallLeft" unique_id=1933782840]
-offset_left = -12.0
-offset_top = -180.0
-offset_right = 12.0
-offset_bottom = 180.0
-color = Color(0.5, 0.5, 0.55, 1)
+[node name="Sprite2D" type="Sprite2D" parent="World/Walls/WallLeft" unique_id=1525634519]
+position = Vector2(8.799988, -196)
+rotation = 3.1415927
+texture = ExtResource("6_272bh")
+
+[node name="Sprite2D2" type="Sprite2D" parent="World/Walls/WallLeft" unique_id=719065588]
+position = Vector2(8.799988, -164)
+rotation = 3.1415927
+texture = ExtResource("6_272bh")
+
+[node name="Sprite2D3" type="Sprite2D" parent="World/Walls/WallLeft" unique_id=1104453809]
+position = Vector2(8.799988, -132)
+rotation = 3.1415927
+texture = ExtResource("6_272bh")
+
+[node name="Sprite2D4" type="Sprite2D" parent="World/Walls/WallLeft" unique_id=1552131653]
+position = Vector2(8.799988, -100)
+rotation = 3.1415927
+texture = ExtResource("6_272bh")
+
+[node name="Sprite2D5" type="Sprite2D" parent="World/Walls/WallLeft" unique_id=388223685]
+position = Vector2(8.799988, -68)
+rotation = 3.1415927
+texture = ExtResource("6_272bh")
+
+[node name="Sprite2D6" type="Sprite2D" parent="World/Walls/WallLeft" unique_id=1647641378]
+position = Vector2(8.799988, -36)
+rotation = 3.1415927
+texture = ExtResource("6_272bh")
+
+[node name="Sprite2D7" type="Sprite2D" parent="World/Walls/WallLeft" unique_id=376031485]
+position = Vector2(8.799988, -4)
+rotation = 3.1415927
+texture = ExtResource("6_272bh")
+
+[node name="Sprite2D8" type="Sprite2D" parent="World/Walls/WallLeft" unique_id=1324533463]
+position = Vector2(8.799988, 28)
+rotation = 3.1415927
+texture = ExtResource("6_272bh")
+
+[node name="Sprite2D9" type="Sprite2D" parent="World/Walls/WallLeft" unique_id=1845895735]
+position = Vector2(8.799988, 60)
+rotation = 3.1415927
+texture = ExtResource("6_272bh")
+
+[node name="Sprite2D10" type="Sprite2D" parent="World/Walls/WallLeft" unique_id=1022354440]
+position = Vector2(8.799988, 92)
+rotation = 3.1415927
+texture = ExtResource("6_272bh")
+
+[node name="Sprite2D11" type="Sprite2D" parent="World/Walls/WallLeft" unique_id=1338864980]
+position = Vector2(8.799988, 124)
+rotation = 3.1415927
+texture = ExtResource("6_272bh")
+
+[node name="Sprite2D12" type="Sprite2D" parent="World/Walls/WallLeft" unique_id=431667638]
+position = Vector2(8.799988, 156)
+rotation = 3.1415927
+texture = ExtResource("6_272bh")
+
+[node name="Sprite2D13" type="Sprite2D" parent="World/Walls/WallLeft" unique_id=1984897278]
+position = Vector2(8.799988, 164)
+rotation = 3.1415927
+texture = ExtResource("6_272bh")
 
 [node name="WallRight" type="StaticBody2D" parent="World/Walls" unique_id=1520979897]
 position = Vector2(332, 0)
@@ -134,6 +264,58 @@ offset_top = -180.0
 offset_right = 12.0
 offset_bottom = 180.0
 color = Color(0.5, 0.5, 0.55, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="World/Walls/WallRight" unique_id=2103343910]
+position = Vector2(-8.5, -196)
+texture = ExtResource("6_272bh")
+
+[node name="Sprite2D2" type="Sprite2D" parent="World/Walls/WallRight" unique_id=1060518655]
+position = Vector2(-8.5, -164)
+texture = ExtResource("6_272bh")
+
+[node name="Sprite2D3" type="Sprite2D" parent="World/Walls/WallRight" unique_id=2061753721]
+position = Vector2(-8.5, -132)
+texture = ExtResource("6_272bh")
+
+[node name="Sprite2D4" type="Sprite2D" parent="World/Walls/WallRight" unique_id=754363291]
+position = Vector2(-8.5, -100)
+texture = ExtResource("6_272bh")
+
+[node name="Sprite2D5" type="Sprite2D" parent="World/Walls/WallRight" unique_id=1516172234]
+position = Vector2(-8.5, -68)
+texture = ExtResource("6_272bh")
+
+[node name="Sprite2D6" type="Sprite2D" parent="World/Walls/WallRight" unique_id=1666591822]
+position = Vector2(-8.5, -36)
+texture = ExtResource("6_272bh")
+
+[node name="Sprite2D7" type="Sprite2D" parent="World/Walls/WallRight" unique_id=1255742424]
+position = Vector2(-8.5, -4)
+texture = ExtResource("6_272bh")
+
+[node name="Sprite2D8" type="Sprite2D" parent="World/Walls/WallRight" unique_id=853663528]
+position = Vector2(-8.5, 28)
+texture = ExtResource("6_272bh")
+
+[node name="Sprite2D9" type="Sprite2D" parent="World/Walls/WallRight" unique_id=1148890142]
+position = Vector2(-8.5, 60)
+texture = ExtResource("6_272bh")
+
+[node name="Sprite2D10" type="Sprite2D" parent="World/Walls/WallRight" unique_id=1634241390]
+position = Vector2(-8.5, 92)
+texture = ExtResource("6_272bh")
+
+[node name="Sprite2D11" type="Sprite2D" parent="World/Walls/WallRight" unique_id=186614650]
+position = Vector2(-8.5, 124)
+texture = ExtResource("6_272bh")
+
+[node name="Sprite2D12" type="Sprite2D" parent="World/Walls/WallRight" unique_id=341161690]
+position = Vector2(-8.5, 156)
+texture = ExtResource("6_272bh")
+
+[node name="Sprite2D13" type="Sprite2D" parent="World/Walls/WallRight" unique_id=878250933]
+position = Vector2(-8.5, 164)
+texture = ExtResource("6_272bh")
 
 [node name="Player" type="CharacterBody2D" parent="World" unique_id=122494693]
 script = ExtResource("1")

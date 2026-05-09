@@ -1,0 +1,30 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://bktorchsf0001"]
+
+[ext_resource type="Texture2D" uid="uid://bktorchf0001" path="res://torches/wall_torch/wall_torch_frame_01.png" id="1_fr1"]
+[ext_resource type="Texture2D" uid="uid://bktorchf0002" path="res://torches/wall_torch/wall_torch_frame_02.png" id="2_fr2"]
+[ext_resource type="Texture2D" uid="uid://bktorchf0003" path="res://torches/wall_torch/wall_torch_frame_03.png" id="3_fr3"]
+[ext_resource type="Texture2D" uid="uid://bktorchf0004" path="res://torches/wall_torch/wall_torch_frame_04.png" id="4_fr4"]
+[ext_resource type="Texture2D" uid="uid://bktorchf0005" path="res://torches/wall_torch/wall_torch_frame_05.png" id="5_fr5"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_fr1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_fr2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_fr3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_fr4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_fr5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
