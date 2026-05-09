@@ -1,6 +1,8 @@
 extends CharacterBody2D
 
 @export var speed: float = 140.0
+## World-space height for idle/attack sprites after scaling (e.g. 64 ≈ two 32×32 floor tiles tall).
+@export var sprite_height_units: float = 64.0
 ## If true, flood-fills transparency from image edges using colors similar to the border.
 ## Black/dark armour can match dark vignettes; tune cutout_rgb_threshold / dark_protect or export a PNG with real alpha instead.
 @export var apply_background_cutout: bool = false
@@ -22,7 +24,7 @@ extends CharacterBody2D
 ## If the attack PNG looks hotter/brighter than idle, darken slightly, e.g. (0.82, 0.82, 0.82).
 @export var attack_modulate: Color = Color.WHITE
 
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var body_sprite: Sprite2D = $BodySprite
 @onready var placeholder: ColorRect = $DebugPlayerPlaceholder
 
 var _idle_tex: Texture2D
@@ -172,30 +174,39 @@ func _cutout_border_connected_background(tex: Texture2D) -> Texture2D:
 
 func _ready() -> void:
 	_ensure_attack_input()
+	if not is_instance_valid(body_sprite):
+		push_error("Player: expected a Sprite2D child named BodySprite.")
+		if is_instance_valid(placeholder):
+			placeholder.visible = true
+		return
 	# If you place your provided character image at res://player.png,
 	# it will be used automatically.
 	if ResourceLoader.exists("res://player.png"):
 		var tex := load("res://player.png") as Texture2D
 		if tex != null:
 			# Remove any material-based keying; we'll cut out into alpha instead.
-			sprite.material = null
+			if body_sprite.material != null:
+				body_sprite.material = null
 			if apply_background_cutout:
-				sprite.texture = _cutout_border_connected_background(tex)
+				body_sprite.texture = _cutout_border_connected_background(tex)
 			else:
-				sprite.texture = tex
-			# Auto-scale very large images to a ~32px-tall sprite.
+				body_sprite.texture = tex
+			# Auto-scale textures so the image height matches sprite_height_units in the world.
 			var h := float(tex.get_height())
 			if h > 0.0:
-				var s := 32.0 / h
-				sprite.scale = Vector2(s, s)
-			_idle_tex = sprite.texture
-			_idle_scale = sprite.scale
-			sprite.modulate = idle_modulate
-			placeholder.visible = false
+				var s := sprite_height_units / h
+				body_sprite.scale = Vector2(s, s)
+			_idle_tex = body_sprite.texture
+			_idle_scale = body_sprite.scale
+			body_sprite.modulate = idle_modulate
+			if is_instance_valid(placeholder):
+				placeholder.visible = false
 		else:
-			placeholder.visible = true
+			if is_instance_valid(placeholder):
+				placeholder.visible = true
 	else:
-		placeholder.visible = true
+		if is_instance_valid(placeholder):
+			placeholder.visible = true
 
 	var attack_paths := PackedStringArray([
 		"res://player_attack_1.png",
@@ -222,7 +233,7 @@ func _sprite_scale_for_height(tex: Texture2D) -> Vector2:
 	var hh := float(tex.get_height())
 	if hh <= 0.0:
 		return Vector2.ONE
-	var s := 32.0 / hh
+	var s := sprite_height_units / hh
 	return Vector2(s, s)
 
 func _apply_attack_frame(elapsed: float) -> void:
@@ -235,8 +246,8 @@ func _apply_attack_frame(elapsed: float) -> void:
 		return
 	_attack_frame_index = idx
 	var tex := _attack_frames[idx]
-	sprite.texture = tex
-	sprite.scale = _sprite_scale_for_height(tex)
+	body_sprite.texture = tex
+	body_sprite.scale = _sprite_scale_for_height(tex)
 
 func _try_begin_attack() -> void:
 	if _attack_frames.is_empty() or _idle_tex == null:
@@ -250,15 +261,15 @@ func _try_begin_attack() -> void:
 	_attack_frame_index = -1
 	var elapsed0 := 0.0
 	_apply_attack_frame(elapsed0)
-	sprite.modulate = attack_modulate
+	body_sprite.modulate = attack_modulate
 
 func _finish_attack() -> void:
 	_attacking = false
 	_attack_time_left = 0.0
 	_attack_frame_index = -1
-	sprite.texture = _idle_tex
-	sprite.scale = _idle_scale
-	sprite.modulate = idle_modulate
+	body_sprite.texture = _idle_tex
+	body_sprite.scale = _idle_scale
+	body_sprite.modulate = idle_modulate
 	_cooldown_left = attack_cooldown
 
 func _physics_process(delta: float) -> void:
