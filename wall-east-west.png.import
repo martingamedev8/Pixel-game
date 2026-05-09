@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://v3wrblmpikir"
-path="res://.godot/imported/torch_asset_08.png-33e2767a0ec5c8bbac635fb5bfb6da1f.ctex"
+uid="uid://dv3qwcx85tmk8"
+path="res://.godot/imported/wall-east-west.png-18a4509ee158b6a2fcf877ee11d7bad3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://torches/torch_asset_08.png"
-dest_files=["res://.godot/imported/torch_asset_08.png-33e2767a0ec5c8bbac635fb5bfb6da1f.ctex"]
+source_file="res://wall-east-west.png"
+dest_files=["res://.godot/imported/wall-east-west.png-18a4509ee158b6a2fcf877ee11d7bad3.ctex"]
 
 [params]
 
