@@ -1,0 +1,16 @@
+# Godot 4+
+.godot/
+.import/
+*.translation
+
+# Exports (folder produced by Export)
+export/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+*.tmp
+
+# Android
+/android/
