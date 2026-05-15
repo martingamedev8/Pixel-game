@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "photopea": {
+      "command": "npx",
+      "args": ["-y", "photopea-mcp-server"]
+    },
+    "spritely": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "sprite-gen-mcp@latest"
+      ],
+      "env": {
+        "SPRITE_GEN_API_KEY": "sk-sprite-db6d59f0140bdb6d858d5d4166a402bfd3ee32456991bd51b33779d52f5d3f4a",
+        "SPRITE_GEN_URL": "https://spritely.studio"
+      }
+    }
+  }
+}
